@@ -41,28 +41,28 @@ namespace WEBHostingbackend.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public List<User> GetUsers()
+        public List<ApplicationUserModel> GetUsers()
         {
            
-            var dtos = new List<User>();
-            var users = _entities.Users/*.Include(C => C.Files).ToList()*/;
-            dtos.AddRange(users.Select(user => new User()
+            var dtos = new List<ApplicationUserModel>();
+            var users = _entities.ApplicationUser/*.Include(C => C.Files).ToList()*/;
+            dtos.AddRange(users.Select(user => new ApplicationUserModel()
             {
-                IdUser = user.IdUser,
+                //Id = user.Id,
 
 
-                Username = user.Username,
+                //Username = user.Username,
 
-                Nom = user.Nom,
-                Prenom = user.Prenom,
-                Entreprise = user.Entreprise,
-                Etat = user.Etat,
+               // Nom = user.Nom,
+                //Prenom = user.Prenom,
+                //Entreprise = user.Entreprise,
+               // Etat = user.Etat,
                 Email = user.Email,
-                Password = user.Password,
-                Téléphone = user.Téléphone,
-                Description = user.Description,
-                Type = user.Type,
-                IdRole = user.IdRole,
+                //Password = user.Password,
+                //Téléphone = user.Téléphone,
+                //Description = user.Description,
+                //Type = user.Type,
+                //IdRole = user.IdRole,
                 
                 /*files = _iFileRepository.getFilesByUserId(user.Id)*/
             }).ToList()) ;

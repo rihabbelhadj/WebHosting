@@ -11,6 +11,13 @@ using WEBHostingbackend.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using WEBHostingbackend.Repository.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using SpeakOut.Entities.Models;
 
 namespace WEBHostingbackend
 {
@@ -70,7 +77,50 @@ namespace WEBHostingbackend
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
-           // services.AddIdentity<AppUser, IdentityRole>(opt => { }).AddEntityFrameworkStores<WebHostingDbContext>() ;
+           // services.AddIdentity<User,UserRole>(opt => { }).AddEntityFrameworkStores<WebHostingDbContext>();
+          //  services.AddIdentityCore<ApplicationUser>()
+              //.AddEntityFrameworkStores<WebHostingDbContext>();
+            services.AddIdentity<ApplicationUser, AspNetRoles>()
+               .AddEntityFrameworkStores<WebHostingDbContext>()
+               .AddDefaultTokenProviders();
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 4;
+            }
+            );
+            //JWT Authentification
+            var Key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"]);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = false;
+                x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero,
+
+
+                };
+            });
+
         }
         public void Configure(IHostingEnvironment env, IApplicationBuilder app)
 

@@ -4,7 +4,7 @@ namespace WEBHostingbackend.Infrastructure.IServices
 {
     public interface IUserServices
     {
-        List<User> GetUsers();
+        List<ApplicationUserModel> GetUsers();
         User Update(User user);
 
         void Add(User user);

@@ -5,11 +5,12 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using WEBHostingbackend.Repository.Models;
+using SpeakOut.Entities.Models;
 
 namespace WEBHostingbackend.Repository
 {
    // public partial class WebHostingDbContext : DbContext
-    public partial class WebHostingDbContext : DbContext
+    public partial class WebHostingDbContext : IdentityDbContext<ApplicationUser, AspNetRoles,Guid>
     {
         public WebHostingDbContext()
         {
@@ -20,6 +21,7 @@ namespace WEBHostingbackend.Repository
         {
         }
 
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<Commande> Commandes { get; set; } = null!;
         public virtual DbSet<Domain> Domains { get; set; } = null!;
         public virtual DbSet<Payement> Payements { get; set; } = null!;
@@ -27,6 +29,7 @@ namespace WEBHostingbackend.Repository
         public virtual DbSet<Service> Services { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<UserRole> UserRoles { get; set; } = null!;
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -39,6 +42,10 @@ namespace WEBHostingbackend.Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasKey(p => new { p.UserId, p.RoleId });
+            modelBuilder.Entity<IdentityUserLogin<Guid>>().HasKey(p => new { p.LoginProvider, p.UserId });
+            modelBuilder.Entity<IdentityUser>();
             modelBuilder.Entity<Commande>(entity =>
             {
                 entity.HasOne(d => d.IdClientNavigation)

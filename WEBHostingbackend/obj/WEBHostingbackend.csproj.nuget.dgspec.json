@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\applicationStage\\Allah\\WEBHostingbackend\\WEBHostingbackend\\WEBHostingbackend.csproj": {}
+    "D:\\applicationStage\\WebHosting\\WEBHostingbackend\\WEBHostingbackend.csproj": {}
   },
   "projects": {
-    "D:\\applicationStage\\Allah\\WEBHostingbackend\\WEBHostingbackend\\WEBHostingbackend.csproj": {
+    "D:\\applicationStage\\WebHosting\\WEBHostingbackend\\WEBHostingbackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\applicationStage\\Allah\\WEBHostingbackend\\WEBHostingbackend\\WEBHostingbackend.csproj",
+        "projectUniqueName": "D:\\applicationStage\\WebHosting\\WEBHostingbackend\\WEBHostingbackend.csproj",
         "projectName": "WEBHostingbackend",
-        "projectPath": "D:\\applicationStage\\Allah\\WEBHostingbackend\\WEBHostingbackend\\WEBHostingbackend.csproj",
+        "projectPath": "D:\\applicationStage\\WebHosting\\WEBHostingbackend\\WEBHostingbackend.csproj",
         "packagesPath": "C:\\Users\\SYB\\.nuget\\packages\\",
-        "outputPath": "D:\\applicationStage\\Allah\\WEBHostingbackend\\WEBHostingbackend\\obj\\",
+        "outputPath": "D:\\applicationStage\\WebHosting\\WEBHostingbackend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -51,6 +51,10 @@
             "Microsoft.AspNet.Identity.EntityFramework": {
               "target": "Package",
               "version": "[2.2.3, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.6, )"
             },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",

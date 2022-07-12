@@ -37,7 +37,7 @@ namespace WEBHostingbackend.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public List<User> GetUsers()
+        public List<ApplicationUserModel> GetUsers()
         {
             var result = _iUserRepository.GetUsers();
             return result;

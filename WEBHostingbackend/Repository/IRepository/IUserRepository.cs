@@ -5,7 +5,7 @@ namespace WEBHostingbackend.Repository.IRepository
     public interface IUserRepository
     {
 
-        List<User> GetUsers();
+        List<ApplicationUserModel> GetUsers();
 
         void Add(User user);
 
