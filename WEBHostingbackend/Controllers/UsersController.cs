@@ -16,7 +16,7 @@ using WEBHostingbackend.Helpers;
 
 namespace WEBHostingbackend.Controllers
 {
-    [Route("api/")]
+    [Route("api/Users")]
 
     [EnableCors("MyAllowSpecificOrigins")]
     [ApiController]
@@ -45,13 +45,27 @@ namespace WEBHostingbackend.Controllers
         #region  Actions
         [EnableCors("AllowOrigin")]
 
-        [HttpGet("Users")]
+        [HttpGet("getUsers")]
         public List<ApplicationUserModel> GetUsers()
         {
             var result = _iUserService.GetUsers();
             return result;
         }
 
+        [HttpGet("byId")]
+        public ApplicationUserModel GetById(Guid id)
+        {
+
+            var result = _iUserService.GetById(id);
+            return result;
+        }
+        [HttpPut("update")]
+        public ApplicationUserModel Update([FromBody] ApplicationUserModel user)
+        {
+            var result = _iUserService.Update(user);
+            return user;
+
+        }
 
         #endregion
         [HttpPost]
@@ -63,7 +77,13 @@ namespace WEBHostingbackend.Controllers
                 UserName = model.UserName,
                 Email = model.Email,
                 fullName = model.fullName,
-                password=model.Password
+                password=model.Password,
+                firstName = model.firstName,
+                lastName=model.lastName,
+                Entreprise=model.Entreprise,
+                phone=model.phone,
+                type=model.type,
+                
             };
 
             try
@@ -74,7 +94,7 @@ namespace WEBHostingbackend.Controllers
                 //_context.ApplicationUser.Add(model.Password);
                 // _context.SaveChanges();
 
-                return Ok(result);
+                return Ok(applicationUser);
             }
             catch (Exception ex)
             {
@@ -82,6 +102,26 @@ namespace WEBHostingbackend.Controllers
                 throw ex;
             }
         }
+        /*[HttpDelete("delete")]
+        public String Delete(Guid id)
+        {
+            var result = _iUserService.Delete(id);
+            return result;
+
+        }
+        */
+
+        [HttpDelete("deleteUser")]
+        public void deleteUser(Guid id)
+        {
+
+
+
+            _iUserService.deleteUser(id);
+
+
+        }
+
         [HttpPost]
         [Route("Login")]
         //POST : /api/ApplicationUser/Login
@@ -120,7 +160,7 @@ namespace WEBHostingbackend.Controllers
                 var user = _context.ApplicationUser.Where(a => a.UserName == model.UserName).FirstOrDefault();
                 if (user != null && (user.password)==model.Password)
                 {
-                    return Ok(new
+                    return Ok( new
                     {
                         StatusCode = 200,
                         Message = "Logged In successuflly",

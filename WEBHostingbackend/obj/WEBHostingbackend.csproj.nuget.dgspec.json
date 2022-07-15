@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\applicationStage\\WebHosting\\WEBHostingbackend\\WEBHostingbackend.csproj": {}
+    "D:\\applicationStage\\stage\\WebHosting\\WEBHostingbackend\\WEBHostingbackend.csproj": {}
   },
   "projects": {
-    "D:\\applicationStage\\WebHosting\\WEBHostingbackend\\WEBHostingbackend.csproj": {
+    "D:\\applicationStage\\stage\\WebHosting\\WEBHostingbackend\\WEBHostingbackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\applicationStage\\WebHosting\\WEBHostingbackend\\WEBHostingbackend.csproj",
+        "projectUniqueName": "D:\\applicationStage\\stage\\WebHosting\\WEBHostingbackend\\WEBHostingbackend.csproj",
         "projectName": "WEBHostingbackend",
-        "projectPath": "D:\\applicationStage\\WebHosting\\WEBHostingbackend\\WEBHostingbackend.csproj",
+        "projectPath": "D:\\applicationStage\\stage\\WebHosting\\WEBHostingbackend\\WEBHostingbackend.csproj",
         "packagesPath": "C:\\Users\\SYB\\.nuget\\packages\\",
-        "outputPath": "D:\\applicationStage\\WebHosting\\WEBHostingbackend\\obj\\",
+        "outputPath": "D:\\applicationStage\\stage\\WebHosting\\WEBHostingbackend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

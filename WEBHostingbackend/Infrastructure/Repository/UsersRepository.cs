@@ -1,4 +1,5 @@
-﻿using WEBHostingbackend.Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using WEBHostingbackend.Repository;
 using WEBHostingbackend.Repository.IRepository;
 using WEBHostingbackend.Repository.Models;
 
@@ -21,24 +22,54 @@ namespace WEBHostingbackend.Infrastructure.Repository
         #endregion
 
         #region Methods
-        public void Add(User user)
+        public void Add(ApplicationUserModel user)
         {
             throw new NotImplementedException();
         }
 
-        public string Delete(int id)
+        public string Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var userToChange = _entities.ApplicationUser.Where(d => d.Id == id).FirstOrDefault();
+            _entities.Attach(userToChange);
+
+            // userToChange.IsValid = false;
+
+            _entities.Entry(userToChange).State = EntityState.Modified;
+            _entities.Update(userToChange);
+            _entities.SaveChangesAsync();
+
+            return "Deleted";
         }
 
-        public void deleteUser(int id)
+        public void deleteUser(Guid id)
         {
-            throw new NotImplementedException();
+            var user = _entities.ApplicationUser.Where(x => x.Id == id).FirstOrDefault();
+            _entities.ApplicationUser.Remove(user);
+            _entities.SaveChanges();
         }
 
-        public User GetById(int id)
+        public ApplicationUserModel GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var dto = new ApplicationUserModel();
+            var user = _entities.ApplicationUser.Find(id);
+            if (user != null)
+            {
+                dto.Id = user.Id;
+                dto.phone = user.phone;
+                dto.fullName = user.fullName;
+                dto.firstName = user.firstName;
+                dto.lastName = user.lastName;
+                dto.UserName = user.UserName;
+                dto.Email = user.Email;
+                dto.Entreprise = user.Entreprise;
+                dto.type = user.type;
+            }
+            else
+            {
+                throw new Exception($"Article with ID = {id} was not found.");
+            }
+            return dto;
+
         }
 
         public List<ApplicationUserModel> GetUsers()
@@ -48,31 +79,46 @@ namespace WEBHostingbackend.Infrastructure.Repository
             var users = _entities.ApplicationUser/*.Include(C => C.Files).ToList()*/;
             dtos.AddRange(users.Select(user => new ApplicationUserModel()
             {
-                //Id = user.Id,
+                Id = user.Id,
 
-
-                //Username = user.Username,
-
-               // Nom = user.Nom,
-                //Prenom = user.Prenom,
-                //Entreprise = user.Entreprise,
-               // Etat = user.Etat,
+                UserName = user.UserName,
+                fullName = user.fullName,
+                firstName = user.lastName,
+                type= user.type,
+                lastName = user.lastName,
+                Entreprise = user.Entreprise,
+              
                 Email = user.Email,
-                //Password = user.Password,
-                //Téléphone = user.Téléphone,
-                //Description = user.Description,
-                //Type = user.Type,
-                //IdRole = user.IdRole,
                 
+                phone = user.phone,
+           
+
                 /*files = _iFileRepository.getFilesByUserId(user.Id)*/
             }).ToList()) ;
 
             return dtos;
         }
 
-        public User Update(User user)
+        public ApplicationUserModel Update(ApplicationUserModel user)
         {
-            throw new NotImplementedException();
+            //var userToChange = _entities.AspNetUsers.FirstOrDefault();
+            var userToChange = _entities.ApplicationUser.Where(d => d.Id == user.Id).FirstOrDefault();
+            _entities.Attach(userToChange);
+            userToChange.Id = user.Id;
+            ////userToChange.UserTypeId = user.UserTypeId;
+            userToChange.UserName = user.UserName;
+            userToChange.phone = user.phone;
+            userToChange.firstName = user.firstName;
+            userToChange.lastName = user.lastName;
+            userToChange.password = user.Password;
+            userToChange.fullName = user.fullName;
+            userToChange.Email = user.Email;
+            userToChange.Entreprise = user.Entreprise;
+            userToChange.type = user.type;
+            _entities.Entry(userToChange).State = EntityState.Modified;
+            _entities.Update(userToChange);
+            _entities.SaveChangesAsync();
+            return user;
         }
         #endregion
     }

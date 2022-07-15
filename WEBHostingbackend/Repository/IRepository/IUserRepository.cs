@@ -7,14 +7,14 @@ namespace WEBHostingbackend.Repository.IRepository
 
         List<ApplicationUserModel> GetUsers();
 
-        void Add(User user);
+        void Add(ApplicationUserModel user);
 
-        User Update(User user);
+        ApplicationUserModel Update(ApplicationUserModel user);
 
 
-        String Delete(int id);
+        String Delete(Guid id);
 
-        User GetById(int id);
-        void deleteUser(int id);
+        ApplicationUserModel GetById(Guid id);
+        void deleteUser(Guid id);
     }
 }

@@ -17,24 +17,26 @@ namespace WEBHostingbackend.Infrastructure.Services
         }
         #endregion
         #region Methods
-        public void Add(User user)
+        public void Add(ApplicationUserModel user)
         {
-            throw new NotImplementedException();
+            _iUserRepository.Add(user);
         }
 
-        public string Delete(int id)
+        public string Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var value = _iUserRepository.Delete(id);
+            return (String)value;
         }
 
-        public void deleteUser(int id)
+        public void deleteUser(Guid id)
         {
-            throw new NotImplementedException();
+            _iUserRepository.deleteUser(id);
         }
 
-        public User GetById(int id)
+        public ApplicationUserModel GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var result = _iUserRepository.GetById(id);
+            return result;
         }
 
         public List<ApplicationUserModel> GetUsers()
@@ -43,9 +45,10 @@ namespace WEBHostingbackend.Infrastructure.Services
             return result;
         }
 
-        public User Update(User user)
+        public ApplicationUserModel Update(ApplicationUserModel user)
         {
-            throw new NotImplementedException();
+            var value = _iUserRepository.Update(user);
+            return user;
         }
         #endregion
     }

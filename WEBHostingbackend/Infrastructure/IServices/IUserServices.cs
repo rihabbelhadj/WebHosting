@@ -5,13 +5,13 @@ namespace WEBHostingbackend.Infrastructure.IServices
     public interface IUserServices
     {
         List<ApplicationUserModel> GetUsers();
-        User Update(User user);
+        ApplicationUserModel Update(ApplicationUserModel user);
 
-        void Add(User user);
+        void Add(ApplicationUserModel user);
 
-        String Delete(int id);
-        User GetById(int id);
-        void deleteUser(int id);
+        String Delete(Guid id);
+        ApplicationUserModel GetById(Guid id);
+        void deleteUser(Guid id);
 
     }
 }
