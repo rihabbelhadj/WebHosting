@@ -10,7 +10,7 @@ using SpeakOut.Entities.Models;
 namespace WEBHostingbackend.Repository
 {
    // public partial class WebHostingDbContext : DbContext
-    public partial class WebHostingDbContext : IdentityDbContext<ApplicationUser, AspNetRoles,Guid>
+    public partial class WebHostingDbContext : IdentityDbContext<AspNetUsers, AspNetRoles,Guid>
     {
         public WebHostingDbContext()
         {
@@ -23,13 +23,13 @@ namespace WEBHostingbackend.Repository
 
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<Commande> Commandes { get; set; } = null!;
-        public virtual DbSet<Domain> Domains { get; set; } = null!;
-        public virtual DbSet<Payement> Payements { get; set; } = null!;
+        public virtual DbSet<Domain> Domain { get; set; } = null!;
+        public virtual DbSet<Payement> Payement { get; set; } = null!;
         public virtual DbSet<Serveur> Serveurs { get; set; } = null!;
         public virtual DbSet<Service> Services { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<UserRole> UserRoles { get; set; } = null!;
-        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<AspNetUsers> ApplicationUser { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -60,15 +60,20 @@ namespace WEBHostingbackend.Repository
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Commande_domaine");
             });
-
             modelBuilder.Entity<Payement>(entity =>
             {
-                entity.HasOne(d => d.IdUserNavigation)
-                    .WithMany(p => p.Payements)
-                    .HasForeignKey(d => d.IdUser)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Payement_User");
+                entity.Property(e => e.idPayement).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Type).IsUnicode(false);
+
+                entity.Property(e => e.Date).IsUnicode(false);
+
+                entity.Property(e => e.Status).IsUnicode(false);
+
+                
             });
+
+
 
             modelBuilder.Entity<User>(entity =>
             {

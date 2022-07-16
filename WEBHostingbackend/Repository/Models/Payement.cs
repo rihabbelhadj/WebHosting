@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using SpeakOut.Entities.Models;
 
 namespace WEBHostingbackend.Repository.Models
 {
@@ -11,7 +12,7 @@ namespace WEBHostingbackend.Repository.Models
     {
         [Key]
         [Column("idPayement")]
-        public int IdPayement { get; set; }
+        public int idPayement { get; set; }
         [Column("type")]
         [StringLength(50)]
         [Unicode(false)]
@@ -21,10 +22,13 @@ namespace WEBHostingbackend.Repository.Models
         [Column("status")]
         public int? Status { get; set; }
         [Column("idUser")]
-        public int IdUser { get; set; }
+        public Guid idUser { get; set; }
+        [ForeignKey(nameof(idUser))]
+        //[ForeignKey("IdUser")]
+        [InverseProperty("Payement")]
+        public virtual AspNetUsers User { get; set; }
 
-        [ForeignKey("IdUser")]
-        [InverseProperty("Payements")]
-        public virtual User IdUserNavigation { get; set; } = null!;
+
+
     }
 }

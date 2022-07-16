@@ -24,8 +24,8 @@ namespace WEBHostingbackend.Controllers
     {
         #region Fields
         private readonly IUserServices _iUserService;
-        private UserManager<ApplicationUser> _userManager;
-        private SignInManager<ApplicationUser> _signInManager;
+        private UserManager<AspNetUsers> _userManager;
+        private SignInManager<AspNetUsers> _signInManager;
         private readonly ApplicationSettings _appSettings;
         private WebHostingDbContext _context;
 
@@ -33,7 +33,7 @@ namespace WEBHostingbackend.Controllers
         #endregion
 
         #region Constructors
-        public UsersController(IUserServices userService, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOptions<ApplicationSettings> appSettings , WebHostingDbContext context)
+        public UsersController(IUserServices userService, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager, IOptions<ApplicationSettings> appSettings , WebHostingDbContext context)
         {
             _iUserService = userService;
             _userManager = userManager;
@@ -72,7 +72,7 @@ namespace WEBHostingbackend.Controllers
         [Route("Register")]
         public async Task<Object> PostApplicationUser(ApplicationUserModel model)
         {
-            var applicationUser = new ApplicationUser()
+            var applicationUser = new AspNetUsers()
             {
                 UserName = model.UserName,
                 Email = model.Email,

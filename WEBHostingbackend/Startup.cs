@@ -62,15 +62,16 @@ namespace WEBHostingbackend
 
             services.AddSwaggerGen((options) =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "SpeakOut API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Backend API", Version = "v1" });
 
             });
 
 
             services.AddTransient<IServeurServices, ServeurServices>();
             services.AddTransient<IServeurRepository, ServeursRepository>();
-
-           services.AddTransient<IUserServices, UserServices>();
+            services.AddTransient<IPayementServices, PayementServices>();
+            services.AddTransient<IPayementRepository, PayementRepository>();
+            services.AddTransient<IUserServices, UserServices>();
            services.AddTransient<IUserRepository, UsersRepository>();
             //services.AddDbContext<WebHostingDbContext>();
             services.AddDbContext<WebHostingDbContext>(opt =>
@@ -80,7 +81,7 @@ namespace WEBHostingbackend
            // services.AddIdentity<User,UserRole>(opt => { }).AddEntityFrameworkStores<WebHostingDbContext>();
           //  services.AddIdentityCore<ApplicationUser>()
               //.AddEntityFrameworkStores<WebHostingDbContext>();
-            services.AddIdentity<ApplicationUser, AspNetRoles>()
+            services.AddIdentity<AspNetUsers, AspNetRoles>()
                .AddEntityFrameworkStores<WebHostingDbContext>()
                .AddDefaultTokenProviders();
             services.Configure<CookiePolicyOptions>(options =>

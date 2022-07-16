@@ -12,7 +12,7 @@ namespace WEBHostingbackend.Repository.Models
         public User()
         {
             Commandes = new HashSet<Commande>();
-            Payements = new HashSet<Payement>();
+           
         }
 
         [Key]
@@ -56,7 +56,9 @@ namespace WEBHostingbackend.Repository.Models
         public virtual UserRole IdRoleNavigation { get; set; } = null!;
         [InverseProperty("IdClientNavigation")]
         public virtual ICollection<Commande> Commandes { get; set; }
-        [InverseProperty("IdUserNavigation")]
-        public virtual ICollection<Payement> Payements { get; set; }
+        /// <summary>
+        //[InverseProperty("IdUserNavigation")]
+        /// </summary>
+       // public virtual ICollection<Payement> Payements { get; set; }
     }
 }
