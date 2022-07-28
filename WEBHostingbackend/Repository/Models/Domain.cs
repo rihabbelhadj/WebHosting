@@ -11,7 +11,7 @@ namespace WEBHostingbackend.Repository.Models
     {
         public Domain()
         {
-            Commandes = new HashSet<Commande>();
+            
         }
 
         [Key]
@@ -28,13 +28,15 @@ namespace WEBHostingbackend.Repository.Models
         [Unicode(false)]
         public string? Root { get; set; }
         [Column("id_de_base")]
-        public int? IdDeBase { get; set; }
+        public Guid? IdDeBase { get; set; }
         [Column("hebergement_type")]
         [StringLength(50)]
-        [Unicode(false)]
+        [Unicode(false)] 
         public string HebergementType { get; set; } = null!;
 
-        [InverseProperty("IdDomaineNavigation")]
-        public virtual ICollection<Commande> Commandes { get; set; }
+        
+        [ForeignKey(nameof(IdDeBase))]
+        [InverseProperty("Domain")]
+        public virtual AspNetUsers User { get; set; }
     }
 }

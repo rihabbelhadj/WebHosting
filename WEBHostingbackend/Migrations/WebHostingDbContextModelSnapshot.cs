@@ -205,7 +205,7 @@ namespace WEBHostingbackend.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("WEBHostingbackend.Repository.Models.ApplicationUser", b =>
+            modelBuilder.Entity("WEBHostingbackend.Repository.Models.AspNetUsers", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -334,10 +334,6 @@ namespace WEBHostingbackend.Migrations
 
                     b.HasKey("IdCommande");
 
-                    b.HasIndex("IdClient");
-
-                    b.HasIndex("IdDomaine");
-
                     b.ToTable("Commande");
                 });
 
@@ -351,6 +347,7 @@ namespace WEBHostingbackend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdDomain"), 1L, 1);
 
                     b.Property<DateTime?>("DateCreation")
+                        .IsUnicode(false)
                         .HasColumnType("date")
                         .HasColumnName("date_creation");
 
@@ -368,8 +365,8 @@ namespace WEBHostingbackend.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("hebergement_type");
 
-                    b.Property<int?>("IdDeBase")
-                        .HasColumnType("int")
+                    b.Property<Guid?>("IdDeBase")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("id_de_base");
 
                     b.Property<string>("Root")
@@ -380,27 +377,27 @@ namespace WEBHostingbackend.Migrations
 
                     b.HasKey("IdDomain");
 
+                    b.HasIndex("IdDeBase");
+
                     b.ToTable("Domain");
                 });
 
             modelBuilder.Entity("WEBHostingbackend.Repository.Models.Payement", b =>
                 {
-                    b.Property<int>("IdPayement")
+                    b.Property<int>("idPayement")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("idPayement");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPayement"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idPayement"), 1L, 1);
 
                     b.Property<DateTime?>("Date")
+                        .IsUnicode(false)
                         .HasColumnType("date")
                         .HasColumnName("date");
 
-                    b.Property<Guid>("IdUser")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("idUser");
-
                     b.Property<int?>("Status")
+                        .IsUnicode(false)
                         .HasColumnType("int")
                         .HasColumnName("status");
 
@@ -410,12 +407,13 @@ namespace WEBHostingbackend.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("type");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<Guid>("idUser")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("idUser");
 
-                    b.HasKey("IdPayement");
+                    b.HasKey("idPayement");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("idUser");
 
                     b.ToTable("Payement");
                 });
@@ -466,6 +464,12 @@ namespace WEBHostingbackend.Migrations
                         .HasColumnName("id_service");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdService"), 1L, 1);
+
+                    b.Property<string>("BandePassante")
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("bande_passante");
 
                     b.Property<string>("EspaceDisque")
                         .IsRequired()
@@ -615,7 +619,7 @@ namespace WEBHostingbackend.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("WEBHostingbackend.Repository.Models.ApplicationUser", null)
+                    b.HasOne("WEBHostingbackend.Repository.Models.AspNetUsers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -624,7 +628,7 @@ namespace WEBHostingbackend.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("WEBHostingbackend.Repository.Models.ApplicationUser", null)
+                    b.HasOne("WEBHostingbackend.Repository.Models.AspNetUsers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -639,7 +643,7 @@ namespace WEBHostingbackend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WEBHostingbackend.Repository.Models.ApplicationUser", null)
+                    b.HasOne("WEBHostingbackend.Repository.Models.AspNetUsers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -648,37 +652,27 @@ namespace WEBHostingbackend.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("WEBHostingbackend.Repository.Models.ApplicationUser", null)
+                    b.HasOne("WEBHostingbackend.Repository.Models.AspNetUsers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WEBHostingbackend.Repository.Models.Commande", b =>
+            modelBuilder.Entity("WEBHostingbackend.Repository.Models.Domain", b =>
                 {
-                    b.HasOne("WEBHostingbackend.Repository.Models.User", "IdClientNavigation")
-                        .WithMany("Commandes")
-                        .HasForeignKey("IdClient")
-                        .IsRequired()
-                        .HasConstraintName("FK_Commande_User");
+                    b.HasOne("WEBHostingbackend.Repository.Models.AspNetUsers", "User")
+                        .WithMany("Domain")
+                        .HasForeignKey("IdDeBase");
 
-                    b.HasOne("WEBHostingbackend.Repository.Models.Domain", "IdDomaineNavigation")
-                        .WithMany("Commandes")
-                        .HasForeignKey("IdDomaine")
-                        .IsRequired()
-                        .HasConstraintName("FK_Commande_domaine");
-
-                    b.Navigation("IdClientNavigation");
-
-                    b.Navigation("IdDomaineNavigation");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WEBHostingbackend.Repository.Models.Payement", b =>
                 {
-                    b.HasOne("WEBHostingbackend.Repository.Models.ApplicationUser", "User")
+                    b.HasOne("WEBHostingbackend.Repository.Models.AspNetUsers", "User")
                         .WithMany("Payement")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("idUser")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -696,19 +690,11 @@ namespace WEBHostingbackend.Migrations
                     b.Navigation("IdRoleNavigation");
                 });
 
-            modelBuilder.Entity("WEBHostingbackend.Repository.Models.ApplicationUser", b =>
+            modelBuilder.Entity("WEBHostingbackend.Repository.Models.AspNetUsers", b =>
                 {
+                    b.Navigation("Domain");
+
                     b.Navigation("Payement");
-                });
-
-            modelBuilder.Entity("WEBHostingbackend.Repository.Models.Domain", b =>
-                {
-                    b.Navigation("Commandes");
-                });
-
-            modelBuilder.Entity("WEBHostingbackend.Repository.Models.User", b =>
-                {
-                    b.Navigation("Commandes");
                 });
 
             modelBuilder.Entity("WEBHostingbackend.Repository.Models.UserRole", b =>

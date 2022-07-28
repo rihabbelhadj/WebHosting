@@ -66,11 +66,15 @@ namespace WEBHostingbackend
 
             });
 
+            services.AddTransient<IServiceServices, ServiceServices>();
+            services.AddTransient<IServiceRepository, ServiceRepository>();
 
             services.AddTransient<IServeurServices, ServeurServices>();
             services.AddTransient<IServeurRepository, ServeursRepository>();
             services.AddTransient<IPayementServices, PayementServices>();
             services.AddTransient<IPayementRepository, PayementRepository>();
+            services.AddTransient<IDomainServices, DomainServices>();
+            services.AddTransient<IDomainRepository, DomainRepository>();
             services.AddTransient<IUserServices, UserServices>();
            services.AddTransient<IUserRepository, UsersRepository>();
             //services.AddDbContext<WebHostingDbContext>();

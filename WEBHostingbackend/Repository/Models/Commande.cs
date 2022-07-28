@@ -27,11 +27,6 @@ namespace WEBHostingbackend.Repository.Models
         [Unicode(false)]
         public string? MsgErreur { get; set; }
 
-        [ForeignKey("IdClient")]
-        [InverseProperty("Commandes")]
-        public virtual User IdClientNavigation { get; set; } = null!;
-        [ForeignKey("IdDomaine")]
-        [InverseProperty("Commandes")]
-        public virtual Domain IdDomaineNavigation { get; set; } = null!;
+       
     }
 }

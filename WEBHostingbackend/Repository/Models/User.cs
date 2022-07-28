@@ -11,7 +11,7 @@ namespace WEBHostingbackend.Repository.Models
     {
         public User()
         {
-            Commandes = new HashSet<Commande>();
+            
            
         }
 
@@ -54,8 +54,7 @@ namespace WEBHostingbackend.Repository.Models
         [ForeignKey("IdRole")]
         [InverseProperty("Users")]
         public virtual UserRole IdRoleNavigation { get; set; } = null!;
-        [InverseProperty("IdClientNavigation")]
-        public virtual ICollection<Commande> Commandes { get; set; }
+       
         /// <summary>
         //[InverseProperty("IdUserNavigation")]
         /// </summary>

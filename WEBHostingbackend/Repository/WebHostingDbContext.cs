@@ -46,20 +46,7 @@ namespace WEBHostingbackend.Repository
             modelBuilder.Entity<IdentityUserRole<Guid>>().HasKey(p => new { p.UserId, p.RoleId });
             modelBuilder.Entity<IdentityUserLogin<Guid>>().HasKey(p => new { p.LoginProvider, p.UserId });
             modelBuilder.Entity<IdentityUser>();
-            modelBuilder.Entity<Commande>(entity =>
-            {
-                entity.HasOne(d => d.IdClientNavigation)
-                    .WithMany(p => p.Commandes)
-                    .HasForeignKey(d => d.IdClient)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Commande_User");
-
-                entity.HasOne(d => d.IdDomaineNavigation)
-                    .WithMany(p => p.Commandes)
-                    .HasForeignKey(d => d.IdDomaine)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Commande_domaine");
-            });
+           
             modelBuilder.Entity<Payement>(entity =>
             {
                 entity.Property(e => e.idPayement).ValueGeneratedOnAdd();
@@ -71,6 +58,19 @@ namespace WEBHostingbackend.Repository
                 entity.Property(e => e.Status).IsUnicode(false);
 
                 
+            });
+            modelBuilder.Entity<Domain>(entity =>
+            {
+                entity.Property(e => e.IdDomain).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.DomainName).IsUnicode(false);
+
+                entity.Property(e => e.Root).IsUnicode(false);
+
+                entity.Property(e => e.HebergementType).IsUnicode(false);
+                entity.Property(e => e.DateCreation).IsUnicode(false);
+
+
             });
 
 

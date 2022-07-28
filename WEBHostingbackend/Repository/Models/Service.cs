@@ -30,6 +30,10 @@ namespace WEBHostingbackend.Repository.Models
         [StringLength(50)]
         [Unicode(false)]
         public string? TypeHebergement { get; set; }
+        [Column("bande_passante")]
+        [StringLength(50)]
+        [Unicode(false)]
+        public string? BandePassante { get; set; }
         [Column("prix")]
         [StringLength(50)]
         [Unicode(false)]

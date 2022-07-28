@@ -162,8 +162,9 @@ namespace WEBHostingbackend.Controllers
                 {
                     return Ok( new
                     {
-                        StatusCode = 200,
-                        Message = "Logged In successuflly",
+                        //StatusCode = 200,
+                        //Message = "Logged In successuflly",
+                        user,
                      
                     }); 
                 }

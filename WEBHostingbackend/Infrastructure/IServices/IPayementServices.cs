@@ -9,7 +9,7 @@ namespace WEBHostingbackend.Infrastructure.IServices
         Payement Update(Payement pay);
 
         void Add(Payement paye);
-
+        
         Payement Delete(Payement pay);
         Payement GetById(int id);
         Payement getByUserId(Guid userId);

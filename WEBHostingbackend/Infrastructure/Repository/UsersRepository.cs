@@ -83,7 +83,7 @@ namespace WEBHostingbackend.Infrastructure.Repository
 
                 UserName = user.UserName,
                 fullName = user.fullName,
-                firstName = user.lastName,
+                firstName = user.firstName,
                 type= user.type,
                 lastName = user.lastName,
                 Entreprise = user.Entreprise,
