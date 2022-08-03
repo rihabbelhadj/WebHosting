@@ -14,7 +14,7 @@ namespace WEBHostingbackend.Repository.IRepository
         Payement Delete(Payement pay);
 
         Payement GetById(int id);
-        Payement getByUserId(Guid userId);
+        List<Payement> getByUserId(Guid userId);
         Task<Object> AddPayement(Payement pay);
     }
 }

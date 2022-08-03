@@ -26,7 +26,14 @@ namespace WEBHostingbackend.Controllers
         }
         #endregion
         #region  Actions
-      
+
+        [HttpGet("GetDomainesByTitle")]
+        public List<Domain> GetDomainesByTitle(string title)
+        {
+            var result = _iDomainServices.GetDomainesByTitle(title);
+            return result;
+        }
+
         [HttpGet("GetAllDomaines")]
         public List<Domain> GetCompanies()
         {

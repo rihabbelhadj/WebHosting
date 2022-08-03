@@ -70,6 +70,24 @@ namespace WEBHostingbackend.Infrastructure.Repository
             return dto;
         }
 
+        public List<Domain> GetDomainesByTitle(string title)
+        {
+            var dtos = new List<Domain>();
+            var domain = _entities.Domain.Where(j => j.DomainName.Contains(title)).ToList();
+            dtos.AddRange(domain.Select(dom => new Domain()
+            {
+                IdDomain = dom.IdDomain,
+                DomainName = dom.DomainName,
+                DateCreation = dom.DateCreation,
+                IdDeBase = dom.IdDeBase,
+                Root=dom.Root,
+                HebergementType=dom.HebergementType,
+             
+
+            }).ToList());
+            return dtos;
+        }
+
         public List<Domain> GetDomains()
         {
             var dtos = new List<Domain>();

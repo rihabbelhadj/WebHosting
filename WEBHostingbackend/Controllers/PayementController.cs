@@ -47,7 +47,7 @@ namespace WEBHostingbackend.Controllers
         }
 
         [HttpGet("GetPayement/ByUserId")]
-        public Payement getByUserId(Guid userId)
+        public List<Payement> getByUserId(Guid userId)
         {
 
             var result = _iPayementService.getByUserId(userId);

@@ -36,7 +36,7 @@ namespace WEBHostingbackend.Infrastructure.Services
             return result;
         }
 
-        public Payement getByUserId(Guid idUser)
+        public List<Payement> getByUserId(Guid idUser)
         {
             var result = _iPayementRepository.getByUserId(idUser);
             return result;

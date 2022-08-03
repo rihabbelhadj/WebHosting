@@ -34,6 +34,11 @@ namespace WEBHostingbackend.Infrastructure.Services
             return result;
         }
 
+        public List<Domain> GetDomainesByTitle(string title)
+        {
+            return _iDomainRepository.GetDomainesByTitle(title);
+        }
+
         public List<Domain> GetDomains()
         {
             var result = _iDomainRepository.GetDomains();

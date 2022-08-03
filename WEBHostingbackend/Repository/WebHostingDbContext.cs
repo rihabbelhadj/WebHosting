@@ -96,7 +96,7 @@ namespace WEBHostingbackend.Repository
 
                 entity.Property(e => e.Prix).IsUnicode(false);
 
-                entity.Property(e => e.NbAutorisé).IsUnicode(false);
+                entity.Property(e => e.NbAutorise).IsUnicode(false);
             });
 
 

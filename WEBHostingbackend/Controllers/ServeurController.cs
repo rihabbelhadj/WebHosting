@@ -31,7 +31,7 @@ namespace WEBHostingbackend.Controllers
         #endregion
         [EnableCors("AllowOrigin")]
         [HttpGet("GetAllServeur")]
-
+        #region  Actions
         public List<Serveur> GetServeurs()
         {
             var result = _iServeurServices.GetServeurs();
@@ -39,7 +39,7 @@ namespace WEBHostingbackend.Controllers
         }
 
 
-        [HttpGet("Serveurs/ById")]
+        [HttpGet("ById")]
         public Serveur GetById(int id)
         {
 
@@ -49,17 +49,17 @@ namespace WEBHostingbackend.Controllers
 
         
 
-        #region  Actions
-        [HttpPost("Serveurs/create")]
+        
+        [HttpPost("create")]
         public void Add(Serveur comp)
         {
 
             _iServeurServices.Add(comp);
 
         }
-        #endregion
+       
 
-        [HttpPut("Serveurs/update")]
+        [HttpPut("update")]
         public Serveur Update(Serveur comp)
         {
             var result = _iServeurServices.Update(comp);
@@ -71,12 +71,12 @@ namespace WEBHostingbackend.Controllers
 
 
 
-        [HttpDelete("Serveurs/delete-by{id}")]
+        [HttpDelete("delete-by{id}")]
         public void Delete(int id)
         {
             _iServeurServices.Delete(id);
          
         }
-
+        #endregion
     }
 }

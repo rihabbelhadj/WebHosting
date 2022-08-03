@@ -13,7 +13,7 @@ namespace WEBHostingbackend.Repository.Models
         [Column("id_service")]
         public int IdService { get; set; }
         [Column("service_Name")]
-        [StringLength(50)]
+        [StringLength(200)]
         [Unicode(false)]
         public string ServiceName { get; set; } = null!;
         [Column("espace_disque")]

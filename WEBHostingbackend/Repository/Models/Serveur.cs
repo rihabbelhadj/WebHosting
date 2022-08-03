@@ -22,7 +22,7 @@ namespace WEBHostingbackend.Repository.Models
         public string HostName { get; set; } = null!;
         [Column("prix")]
         public int Prix { get; set; }
-        [Column("nb_autorisé")]
-        public int NbAutorisé { get; set; }
+        [Column("nb_autorise")]
+        public int NbAutorise { get; set; }
     }
 }

@@ -15,5 +15,6 @@ namespace WEBHostingbackend.Repository.IRepository
 
         Domain GetById(int id);
         List<Domain> GetDomainsbyUserId(Guid id);
+        List<Domain> GetDomainesByTitle(string title);
     }
 }

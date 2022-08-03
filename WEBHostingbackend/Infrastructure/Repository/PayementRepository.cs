@@ -76,27 +76,25 @@ namespace WEBHostingbackend.Infrastructure.Repository
             return dto;
         }
 
-        public Payement getByUserId(Guid IdUser)
+        public List<Payement> getByUserId(Guid IdUser)
         {
-            var dto = new Payement();
+            var dto = new List<Payement>();
 
-            var pay = _entities.Payement.Where(d => d.idUser == IdUser).FirstOrDefault();
+            var pay = _entities.Payement.Where(d => d.idUser == IdUser).ToList();
 
-            if (pay != null)
+            dto.AddRange(pay.Select(dom => new Payement()
             {
-                dto.idPayement = pay.idPayement;
-                dto.Type = pay.Type;
-                dto.Date = pay.Date;
-                dto.Status = pay.Status;
-                dto.idUser = pay.idUser;
+                idPayement = dom.idPayement,
+                Type = dom.Type,
+                Date = dom.Date,
+                Status = dom.Status,
+                idUser = dom.idUser,
                 //dto.User=pay.User;
-                
 
 
-            }
-            else
-            {
-            }
+
+            }).ToList());
+           
 
             return dto;
         }

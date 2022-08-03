@@ -110,8 +110,8 @@ namespace WEBHostingbackend.Infrastructure.Repository
             userToChange.phone = user.phone;
             userToChange.firstName = user.firstName;
             userToChange.lastName = user.lastName;
-            userToChange.password = user.Password;
-            userToChange.fullName = user.fullName;
+           // userToChange.password = user.Password;
+            //userToChange.fullName = user.fullName;
             userToChange.Email = user.Email;
             userToChange.Entreprise = user.Entreprise;
             userToChange.type = user.type;

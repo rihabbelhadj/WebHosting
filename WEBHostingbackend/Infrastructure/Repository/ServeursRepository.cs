@@ -27,7 +27,7 @@ namespace WEBHostingbackend.Infrastructure.Repository
                 PlateformeType = comp.PlateformeType,
                 HostName = comp.HostName,
                 Prix = comp.Prix,
-                NbAutorisé = comp.NbAutorisé
+                NbAutorise = comp.NbAutorise
             };
 
             context.Serveurs.Add(serveurNew);
@@ -58,7 +58,7 @@ namespace WEBHostingbackend.Infrastructure.Repository
                 dto.PlateformeType = comp.PlateformeType;
                 dto.HostName = comp.HostName;
                 dto.Prix = comp.Prix;
-                dto.NbAutorisé = comp.NbAutorisé;
+                dto.NbAutorise = comp.NbAutorise;
             }
             else
             {
@@ -89,7 +89,7 @@ namespace WEBHostingbackend.Infrastructure.Repository
                     PlateformeType = comp.PlateformeType,
                     HostName = comp.HostName,
                     Prix = comp.Prix,
-                    NbAutorisé = comp.NbAutorisé
+                    NbAutorise = comp.NbAutorise
 
                 }).ToList());
 
@@ -110,7 +110,7 @@ namespace WEBHostingbackend.Infrastructure.Repository
             servToChange.PlateformeType = comp.PlateformeType;
             servToChange.HostName = comp.HostName;
             servToChange.Prix = comp.Prix;
-            servToChange.NbAutorisé = comp.NbAutorisé;
+            servToChange.NbAutorise = comp.NbAutorise;
 
             context.Entry(servToChange).State = EntityState.Modified;
             context.Update(servToChange);

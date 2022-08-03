@@ -13,5 +13,6 @@ namespace WEBHostingbackend.Infrastructure.IServices
         Domain GetById(int id);
 
        List< Domain> GetDomainsbyUserId(Guid id);
+        List<Domain> GetDomainesByTitle(string title);
     }
 }
