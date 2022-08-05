@@ -14,7 +14,8 @@ namespace WEBHostingbackend.Repository.IRepository
         String Delete(int id);
 
         Commande GetById(int id);
-    
+        List<Commande> GetBydomaineId(int id);
+
         //List<Commande> GetDomainesByTitle(string title);
     }
 }

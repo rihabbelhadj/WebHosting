@@ -14,5 +14,7 @@ namespace WEBHostingbackend.Infrastructure.IServices
         String Delete(int id);
 
         Commande GetById(int id);
+        List<Commande> GetBydomaineId(int id);
+
     }
 }

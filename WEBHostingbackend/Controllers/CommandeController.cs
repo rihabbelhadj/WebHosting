@@ -31,12 +31,31 @@ namespace WEBHostingbackend.Controllers
             var result = _iCommandeServices.GetCommande();
             return result;
         }
+        [HttpGet("GetByDomaineId")]
+        public List<Commande> GetBydomaineId(int id)
+        {
+            var result = _iCommandeServices.GetBydomaineId(id);
+            return result;
+        }
         [HttpPost("AddCommande")]
         public Commande Add(Commande comm)
         {
            var result= _iCommandeServices.Add(comm);
             return result;
 
+        }
+        [HttpDelete("deleteById")]
+        public String Delete(int id)
+        {
+            var result = _iCommandeServices.Delete(id);
+            return result;
+
+        }
+        [HttpPut("UpdateCommande")]
+        public Commande Update(Commande commande)
+        {
+            var result = _iCommandeServices.Update(commande);
+            return result;
         }
         #endregion
 
