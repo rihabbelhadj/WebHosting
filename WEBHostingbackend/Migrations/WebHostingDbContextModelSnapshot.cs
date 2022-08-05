@@ -308,31 +308,35 @@ namespace WEBHostingbackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCommande"), 1L, 1);
 
-                    b.Property<string>("Etat")
-                        .HasMaxLength(50)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("etat");
-
-                    b.Property<int>("IdClient")
-                        .HasColumnType("int")
-                        .HasColumnName("id_client");
-
                     b.Property<int>("IdDomaine")
                         .HasColumnType("int")
                         .HasColumnName("id_domaine");
 
-                    b.Property<int>("IdPayement")
+                    b.Property<int>("IdService")
                         .HasColumnType("int")
-                        .HasColumnName("id_payement");
+                        .HasColumnName("id_service");
 
-                    b.Property<string>("MsgErreur")
-                        .HasMaxLength(50)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("msg_erreur");
+                    b.Property<bool>("IsValid")
+                        .HasColumnType("bit")
+                        .HasColumnName("isValid");
+
+                    b.Property<int>("NbAnnee")
+                        .HasColumnType("int")
+                        .HasColumnName("nb_annee");
+
+                    b.Property<float>("Prix")
+                        .HasColumnType("real")
+                        .HasColumnName("prix");
+
+                    b.Property<float>("TVA")
+                        .HasColumnType("real")
+                        .HasColumnName("tva");
 
                     b.HasKey("IdCommande");
+
+                    b.HasIndex("IdDomaine");
+
+                    b.HasIndex("IdService");
 
                     b.ToTable("Commande");
                 });
@@ -434,10 +438,10 @@ namespace WEBHostingbackend.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("host_name");
 
-                    b.Property<int>("NbAutorisé")
+                    b.Property<int>("NbAutorise")
                         .IsUnicode(false)
                         .HasColumnType("int")
-                        .HasColumnName("nb_autorisé");
+                        .HasColumnName("nb_autorise");
 
                     b.Property<string>("PlateformeType")
                         .IsRequired()
@@ -490,9 +494,9 @@ namespace WEBHostingbackend.Migrations
 
                     b.Property<string>("ServiceName")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasMaxLength(200)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(50)")
+                        .HasColumnType("varchar(200)")
                         .HasColumnName("service_Name");
 
                     b.Property<string>("TraficMesuel")
@@ -659,6 +663,25 @@ namespace WEBHostingbackend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WEBHostingbackend.Repository.Models.Commande", b =>
+                {
+                    b.HasOne("WEBHostingbackend.Repository.Models.Domain", "Dom")
+                        .WithMany("Commandes")
+                        .HasForeignKey("IdDomaine")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WEBHostingbackend.Repository.Models.Service", "Serv")
+                        .WithMany("Commandes")
+                        .HasForeignKey("IdService")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Dom");
+
+                    b.Navigation("Serv");
+                });
+
             modelBuilder.Entity("WEBHostingbackend.Repository.Models.Domain", b =>
                 {
                     b.HasOne("WEBHostingbackend.Repository.Models.AspNetUsers", "User")
@@ -695,6 +718,16 @@ namespace WEBHostingbackend.Migrations
                     b.Navigation("Domain");
 
                     b.Navigation("Payement");
+                });
+
+            modelBuilder.Entity("WEBHostingbackend.Repository.Models.Domain", b =>
+                {
+                    b.Navigation("Commandes");
+                });
+
+            modelBuilder.Entity("WEBHostingbackend.Repository.Models.Service", b =>
+                {
+                    b.Navigation("Commandes");
                 });
 
             modelBuilder.Entity("WEBHostingbackend.Repository.Models.UserRole", b =>

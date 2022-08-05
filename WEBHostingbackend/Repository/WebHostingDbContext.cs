@@ -22,7 +22,7 @@ namespace WEBHostingbackend.Repository
         }
 
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<Commande> Commandes { get; set; } = null!;
+        public virtual DbSet<Commande> Commande { get; set; } = null!;
         public virtual DbSet<Domain> Domain { get; set; } = null!;
         public virtual DbSet<Payement> Payement { get; set; } = null!;
         public virtual DbSet<Serveur> Serveurs { get; set; } = null!;
@@ -97,6 +97,23 @@ namespace WEBHostingbackend.Repository
                 entity.Property(e => e.Prix).IsUnicode(false);
 
                 entity.Property(e => e.NbAutorise).IsUnicode(false);
+            });
+            modelBuilder.Entity<Commande>(entity =>
+            {
+                entity.Property(e => e.IdCommande).ValueGeneratedOnAdd();
+                entity.HasIndex(e => e.IdCommande);
+
+                
+
+               entity.HasKey(e => e.IdCommande)
+                    .HasName("PK_Commande");
+                entity.HasOne(d => d.Serv)
+                .WithMany(p => p.Commandes)
+                .HasForeignKey(d => d.IdService)
+                .HasConstraintName("FK_Commande_Service_id_service");
+
+               
+
             });
 
 

@@ -9,6 +9,10 @@ namespace WEBHostingbackend.Repository.Models
     [Table("Service")]
     public partial class Service
     {
+        public Service()
+        {
+            Commandes = new HashSet<Commande>();
+        }
         [Key]
         [Column("id_service")]
         public int IdService { get; set; }
@@ -38,5 +42,7 @@ namespace WEBHostingbackend.Repository.Models
         [StringLength(50)]
         [Unicode(false)]
         public string? Prix { get; set; }
+        [InverseProperty("Serv")]
+        public virtual ICollection<Commande> Commandes { get; set; }
     }
 }

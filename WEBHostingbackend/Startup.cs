@@ -69,6 +69,9 @@ namespace WEBHostingbackend
             services.AddTransient<IServiceServices, ServiceServices>();
             services.AddTransient<IServiceRepository, ServiceRepository>();
 
+            services.AddTransient<ICommandeServices, CommandeServices>();
+            services.AddTransient<ICommandeRepository, CommandeRepository>();
+
             services.AddTransient<IServeurServices, ServeurServices>();
             services.AddTransient<IServeurRepository, ServeursRepository>();
             services.AddTransient<IPayementServices, PayementServices>();
