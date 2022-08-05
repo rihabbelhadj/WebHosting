@@ -31,6 +31,13 @@ namespace WEBHostingbackend.Controllers
             var result = _iCommandeServices.GetCommande();
             return result;
         }
+        [HttpPost("AddCommande")]
+        public Commande Add(Commande comm)
+        {
+           var result= _iCommandeServices.Add(comm);
+            return result;
+
+        }
         #endregion
 
     }

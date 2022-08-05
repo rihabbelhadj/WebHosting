@@ -6,7 +6,7 @@ namespace WEBHostingbackend.Repository.IRepository
     {
         List<Commande> GetCommande();
 
-        void Add(Commande com);
+        Commande Add(Commande com);
 
         Commande Update(Commande com);
 

@@ -17,9 +17,10 @@ namespace WEBHostingbackend.Infrastructure.Services
         }
         #endregion
         #region Action
-        public void Add(Commande com)
+        public Commande Add(Commande com)
         {
-            _iCommandeRepository.Add(com);
+            var value =_iCommandeRepository.Add(com);
+            return value;
         }
 
         public string Delete(int id)

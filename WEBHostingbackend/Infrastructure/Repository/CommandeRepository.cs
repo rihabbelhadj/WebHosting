@@ -17,9 +17,25 @@ namespace WEBHostingbackend.Infrastructure.Repository
         }
         #endregion
         #region Action
-        public void Add(Commande com)
+        public Commande Add(Commande com)
         {
-            throw new NotImplementedException();
+            var comNew = new Commande
+            {
+                IdCommande=com.IdCommande,
+                IdDomaine=com.IdDomaine,
+                IdService=com.IdService,
+                NbAnnee=com.NbAnnee,
+                IsValid=com.IsValid,
+                Prix=com.Prix,
+                TVA=com.TVA
+
+                
+
+            };
+
+            _entities.Commande.Add(comNew);
+            _entities.SaveChanges();
+            return comNew;
         }
 
         public string Delete(int id)
