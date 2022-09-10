@@ -15,7 +15,7 @@ namespace WEBHostingbackend.Infrastructure.Repository
         {
             _entities = entities;
         }
-        public void Add(Domain domain)
+        public Domain Add(Domain domain)
         {
             var DomNew = new Domain
             {
@@ -31,6 +31,7 @@ namespace WEBHostingbackend.Infrastructure.Repository
 
             _entities.Domain.Add(DomNew);
             _entities.SaveChanges();
+            return DomNew;
         }
 
         public string Delete(int id)

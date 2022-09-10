@@ -40,6 +40,9 @@ namespace WEBHostingbackend.Repository.Models
         [ForeignKey(nameof(IdService))]
         [InverseProperty(nameof(Service.Commandes))]
         public virtual Service Serv { get; set; }
+
+      
+
         /*[InverseProperty("commande")]
                 public virtual ICollection<Domain> Domain { get; set; }*/
 

@@ -6,7 +6,7 @@ namespace WEBHostingbackend.Repository.IRepository
     {
         List<Domain> GetDomains();
 
-        void Add(Domain domain);
+        Domain Add(Domain domain);
 
         Domain Update(Domain domain);
 

@@ -23,6 +23,8 @@ namespace WEBHostingbackend.Repository.Models
         public int? Status { get; set; }
         [Column("idUser")]
         public Guid idUser { get; set; }
+       
+
         [ForeignKey(nameof(idUser))]
         //[ForeignKey("IdUser")]
         [InverseProperty("Payement")]

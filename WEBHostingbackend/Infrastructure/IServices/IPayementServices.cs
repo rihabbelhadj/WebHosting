@@ -13,6 +13,8 @@ namespace WEBHostingbackend.Infrastructure.IServices
         Payement Delete(Payement pay);
         Payement GetById(int id);
         List<Payement> getByUserId(Guid userId);
-       
+         List<Payement> getByStatus(int status);
+
+
     }
 }

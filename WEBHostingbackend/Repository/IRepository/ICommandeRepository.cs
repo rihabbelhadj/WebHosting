@@ -15,6 +15,7 @@ namespace WEBHostingbackend.Repository.IRepository
 
         Commande GetById(int id);
         List<Commande> GetBydomaineId(int id);
+        List<Commande> GetByServiceId(int id);
 
         //List<Commande> GetDomainesByTitle(string title);
     }

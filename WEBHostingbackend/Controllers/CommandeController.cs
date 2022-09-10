@@ -37,6 +37,12 @@ namespace WEBHostingbackend.Controllers
             var result = _iCommandeServices.GetBydomaineId(id);
             return result;
         }
+        [HttpGet("GetByServcieId")]
+        public List<Commande> GetByServiceId(int id)
+        {
+            var result = _iCommandeServices.GetByServiceId(id);
+            return result;
+        }
         [HttpPost("AddCommande")]
         public Commande Add(Commande comm)
         {
@@ -57,6 +63,7 @@ namespace WEBHostingbackend.Controllers
             var result = _iCommandeServices.Update(commande);
             return result;
         }
+
         #endregion
 
     }

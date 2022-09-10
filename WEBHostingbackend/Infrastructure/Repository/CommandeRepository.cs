@@ -135,8 +135,9 @@ namespace WEBHostingbackend.Infrastructure.Repository
         }
         public List<Commande> GetBydomaineId(int id)
         {
-            var dtos = new List<Commande>();
-            var comms = _entities.Commande.Where(x => x.IdDomaine == id).ToList();
+        var comms = _entities.Commande.Include(J => J.Serv).Include(Jo => Jo.Dom).Where(x => x.IdDomaine == id).ToList();
+        var dtos = new List<Commande>();
+            
             dtos.AddRange(comms.Select(com => new Commande()
             {
                 IdCommande=com.IdCommande,
@@ -146,11 +147,32 @@ namespace WEBHostingbackend.Infrastructure.Repository
                 TVA=com.TVA,
                 NbAnnee=com.NbAnnee,
                 Prix=com.Prix,
-              // Dom = new Domain { IdDomain = com.Dom.IdDomain, DomainName = com.Dom.DomainName, DateCreation = com.Dom.DateCreation, HebergementType = com.Dom.HebergementType, IdDeBase = com.Dom.IdDeBase, Root = com.Dom.Root },
-              // Serv = new Service { IdService = com.Serv.IdService, ServiceName = com.Serv.ServiceName, BandePassante = com.Serv.BandePassante, Prix = com.Serv.Prix, NbEmail = com.Serv.NbEmail, EspaceDisque = com.Serv.EspaceDisque, TypeHebergement = com.Serv.TypeHebergement }
+               Dom = new Domain { IdDomain = com.Dom.IdDomain, DomainName = com.Dom.DomainName, DateCreation = com.Dom.DateCreation, HebergementType = com.Dom.HebergementType, IdDeBase = com.Dom.IdDeBase, Root = com.Dom.Root },
+              Serv = new Service { IdService = com.Serv.IdService, ServiceName = com.Serv.ServiceName, BandePassante = com.Serv.BandePassante, Prix = com.Serv.Prix, NbEmail = com.Serv.NbEmail, EspaceDisque = com.Serv.EspaceDisque, TypeHebergement = com.Serv.TypeHebergement }
 
             }).ToList());
             return dtos;
+        }
+        public List<Commande> GetByServiceId(int id)
+        {
+
+            var dtos = new List<Commande>();
+            var comms = _entities.Commande.Include(J => J.Serv).Include(Jo => Jo.Dom).Where(x => x.IdService == id).ToList();
+            dtos.AddRange(comms.Select(com => new Commande()
+            {
+                IdCommande = com.IdCommande,
+                IdDomaine = com.IdDomaine,
+                IdService = com.IdService,
+                IsValid = com.IsValid,
+                TVA = com.TVA,
+                NbAnnee = com.NbAnnee,
+                Prix = com.Prix,
+                 Dom = new Domain { IdDomain = com.Dom.IdDomain, DomainName = com.Dom.DomainName, DateCreation = com.Dom.DateCreation, HebergementType = com.Dom.HebergementType, IdDeBase = com.Dom.IdDeBase, Root = com.Dom.Root },
+                 Serv = new Service { IdService = com.Serv.IdService, ServiceName = com.Serv.ServiceName, BandePassante = com.Serv.BandePassante, Prix = com.Serv.Prix, NbEmail = com.Serv.NbEmail, EspaceDisque = com.Serv.EspaceDisque, TypeHebergement = com.Serv.TypeHebergement }
+
+            }).ToList());
+            return dtos;
+
         }
 
         #endregion

@@ -45,6 +45,13 @@ namespace WEBHostingbackend.Controllers
         #region  Actions
         [EnableCors("AllowOrigin")]
 
+
+        [HttpGet("getByRole")]
+        public List<ApplicationUserModel> GetUsersByRole(string type)
+        {
+            var result = _iUserService.GetUsersByRole(type);
+            return result;
+        }
         [HttpGet("getUsers")]
         public List<ApplicationUserModel> GetUsers()
         {
@@ -67,7 +74,7 @@ namespace WEBHostingbackend.Controllers
 
         }
 
-        #endregion
+      
         [HttpPost]
         [Route("Register")]
         public async Task<Object> PostApplicationUser(ApplicationUserModel model)
@@ -174,6 +181,7 @@ namespace WEBHostingbackend.Controllers
                 }
                         }
         }
+        #endregion
 
     }
 }

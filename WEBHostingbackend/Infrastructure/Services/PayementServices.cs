@@ -53,6 +53,11 @@ namespace WEBHostingbackend.Infrastructure.Services
             var value = _iPayementRepository.Update(pay);
             return pay;
         }
+        public List<Payement> getByStatus(int status)
+        {
+            var list = _iPayementRepository.getByStatus(status);
+            return list;
+        }
         #endregion
     }
 }

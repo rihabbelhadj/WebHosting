@@ -7,7 +7,7 @@ namespace WEBHostingbackend.Infrastructure.IServices
         List<Domain> GetDomains();
         Domain Update(Domain domain);
 
-        void Add(Domain domain);
+        Domain Add(Domain domain);
 
         String Delete(int id);
         Domain GetById(int id);

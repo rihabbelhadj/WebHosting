@@ -44,7 +44,10 @@ namespace WEBHostingbackend.Infrastructure.Services
             var result = _iUserRepository.GetUsers();
             return result;
         }
-
+        public List<ApplicationUserModel> GetUsersByRole(string type)
+        {
+            return _iUserRepository.GetUsersByRole(type);
+        }
         public ApplicationUserModel Update(ApplicationUserModel user)
         {
             var value = _iUserRepository.Update(user);

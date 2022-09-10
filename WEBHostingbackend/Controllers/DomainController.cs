@@ -63,9 +63,9 @@ namespace WEBHostingbackend.Controllers
 
         }
         [HttpPost("AddDomain")]
-        public void Add(Domain domain)
+        public Domain Add(Domain domain)
         {
-             _iDomainServices.Add(domain);
+           return  _iDomainServices.Add(domain);
             
         }
         [HttpPut("UpdateDomain")]

@@ -17,9 +17,9 @@ namespace WEBHostingbackend.Infrastructure.Services
         }
         #endregion
         #region Methods
-        public void Add(Domain domain)
+        public Domain Add(Domain domain)
         {
-            _iDomainRepository.Add(domain);
+           return  _iDomainRepository.Add(domain);
         }
 
         public string Delete(int id)

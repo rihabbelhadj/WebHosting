@@ -71,6 +71,28 @@ namespace WEBHostingbackend.Infrastructure.Repository
             return dto;
 
         }
+           public  List<ApplicationUserModel> GetUsersByRole(string type)
+           {
+
+           
+            var dto = new List<ApplicationUserModel>();
+            var user = _entities.ApplicationUser.Where(u => u.type == type).ToList();
+            dto.AddRange(user.Select(users => new ApplicationUserModel()
+            {
+                Id = users.Id,
+                phone = users.phone,
+                fullName = users.fullName,
+                firstName = users.firstName,
+                lastName = users.lastName,
+                UserName = users.UserName,
+                Email = users.Email,
+                Entreprise = users.Entreprise,
+                type = users.type,
+            }).ToList());
+           
+            return dto;
+
+        }
 
         public List<ApplicationUserModel> GetUsers()
         {

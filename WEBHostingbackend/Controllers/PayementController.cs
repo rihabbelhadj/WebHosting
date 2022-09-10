@@ -52,6 +52,12 @@ namespace WEBHostingbackend.Controllers
 
             var result = _iPayementService.getByUserId(userId);
             return result;
+        }[HttpGet("GetPayement/Bystatus")]
+        public List<Payement> getByStatus(int status)
+        {
+
+            var result = _iPayementService.getByStatus(status);
+            return result;
         }
 
         [HttpPost("create")]

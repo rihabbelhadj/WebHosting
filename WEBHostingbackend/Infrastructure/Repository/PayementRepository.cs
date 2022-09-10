@@ -25,6 +25,7 @@ namespace WEBHostingbackend.Infrastructure.Repository
             var PayNew = new Payement
             {
               idPayement=paye.idPayement,
+            
               Type=paye.Type,
               Date=paye.Date,
               Status=paye.Status,
@@ -62,6 +63,7 @@ namespace WEBHostingbackend.Infrastructure.Repository
             if (pay != null)
             {
                 dto.idPayement = pay.idPayement;
+              
                 dto.Type = pay.Type;
                 dto.Date = pay.Date;
                 dto.Status = pay.Status;
@@ -85,6 +87,7 @@ namespace WEBHostingbackend.Infrastructure.Repository
             dto.AddRange(pay.Select(dom => new Payement()
             {
                 idPayement = dom.idPayement,
+              
                 Type = dom.Type,
                 Date = dom.Date,
                 Status = dom.Status,
@@ -98,6 +101,29 @@ namespace WEBHostingbackend.Infrastructure.Repository
 
             return dto;
         }
+        public List<Payement> getByStatus(int status)
+        {
+            var dto = new List<Payement>();
+
+            var pay = _entities.Payement.Where(d => d.Status == status).ToList();
+
+            dto.AddRange(pay.Select(dom => new Payement()
+            {
+                idPayement = dom.idPayement,
+
+                Type = dom.Type,
+                Date = dom.Date,
+                Status = dom.Status,
+                idUser = dom.idUser,
+                //dto.User=pay.User;
+
+
+
+            }).ToList());
+
+
+            return dto;
+        }
 
         public List<Payement> GetPayements()
         {
@@ -107,10 +133,12 @@ namespace WEBHostingbackend.Infrastructure.Repository
             {
 
                 idPayement = paye.idPayement,
+               
                 idUser = paye.idUser,
                 Type = paye.Type,
                 Date = paye.Date,
                 Status = paye.Status,
+              
                 //User = paye.User,
                 
                 

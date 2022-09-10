@@ -332,7 +332,10 @@ namespace WEBHostingbackend.Migrations
                         .HasColumnType("real")
                         .HasColumnName("tva");
 
-                    b.HasKey("IdCommande");
+                    b.HasKey("IdCommande")
+                        .HasName("PK_Commande");
+
+                    b.HasIndex("IdCommande");
 
                     b.HasIndex("IdDomaine");
 
@@ -400,6 +403,10 @@ namespace WEBHostingbackend.Migrations
                         .HasColumnType("date")
                         .HasColumnName("date");
 
+                    b.Property<int>("IdCommande")
+                        .HasColumnType("int")
+                        .HasColumnName("id_commande");
+
                     b.Property<int?>("Status")
                         .IsUnicode(false)
                         .HasColumnType("int")
@@ -416,6 +423,8 @@ namespace WEBHostingbackend.Migrations
                         .HasColumnName("idUser");
 
                     b.HasKey("idPayement");
+
+                    b.HasIndex("IdCommande");
 
                     b.HasIndex("idUser");
 
@@ -675,7 +684,8 @@ namespace WEBHostingbackend.Migrations
                         .WithMany("Commandes")
                         .HasForeignKey("IdService")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_Commande_Service_id_service");
 
                     b.Navigation("Dom");
 
@@ -693,11 +703,19 @@ namespace WEBHostingbackend.Migrations
 
             modelBuilder.Entity("WEBHostingbackend.Repository.Models.Payement", b =>
                 {
+                    b.HasOne("WEBHostingbackend.Repository.Models.Commande", "Pay")
+                        .WithMany("pay")
+                        .HasForeignKey("IdCommande")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WEBHostingbackend.Repository.Models.AspNetUsers", "User")
                         .WithMany("Payement")
                         .HasForeignKey("idUser")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Pay");
 
                     b.Navigation("User");
                 });
@@ -718,6 +736,11 @@ namespace WEBHostingbackend.Migrations
                     b.Navigation("Domain");
 
                     b.Navigation("Payement");
+                });
+
+            modelBuilder.Entity("WEBHostingbackend.Repository.Models.Commande", b =>
+                {
+                    b.Navigation("pay");
                 });
 
             modelBuilder.Entity("WEBHostingbackend.Repository.Models.Domain", b =>

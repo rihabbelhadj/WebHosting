@@ -16,5 +16,6 @@ namespace WEBHostingbackend.Repository.IRepository
         Payement GetById(int id);
         List<Payement> getByUserId(Guid userId);
         Task<Object> AddPayement(Payement pay);
+        List<Payement> getByStatus(int status);
     }
 }

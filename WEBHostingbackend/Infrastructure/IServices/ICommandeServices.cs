@@ -15,6 +15,7 @@ namespace WEBHostingbackend.Infrastructure.IServices
 
         Commande GetById(int id);
         List<Commande> GetBydomaineId(int id);
+        List<Commande> GetByServiceId(int id);
 
     }
 }

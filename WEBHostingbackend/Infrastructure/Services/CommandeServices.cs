@@ -39,6 +39,11 @@ namespace WEBHostingbackend.Infrastructure.Services
             return _iCommandeRepository.GetBydomaineId(id);
 
         }
+        public List<Commande> GetByServiceId(int id)
+        {
+            return _iCommandeRepository.GetByServiceId(id);
+
+        }
         public List<Commande> GetCommande()
         {
             var result = _iCommandeRepository.GetCommande();

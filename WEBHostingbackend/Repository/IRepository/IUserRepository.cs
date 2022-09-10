@@ -6,6 +6,7 @@ namespace WEBHostingbackend.Repository.IRepository
     {
 
         List<ApplicationUserModel> GetUsers();
+        List<ApplicationUserModel> GetUsersByRole(string type);
 
         void Add(ApplicationUserModel user);
 
@@ -13,7 +14,7 @@ namespace WEBHostingbackend.Repository.IRepository
 
 
         String Delete(Guid id);
-
+       
         ApplicationUserModel GetById(Guid id);
         void deleteUser(Guid id);
     }
